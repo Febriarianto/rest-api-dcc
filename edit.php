@@ -18,14 +18,21 @@ if (isset($_POST['update'])) {
     $dirUpload = "Upload/";
 
     // pindahkan file
-    $terupload = move_uploaded_file($namaSementara, $dirUpload . $namaFile);
+    $file_type = $_FILES['avatar']['type']; //returns the mimetype
+
+    $allowed = array("image/jpeg", "image/gif", "image/png", "image/jpg");
+    if (!in_array($file_type, $allowed)) {
+        # code...
+        $terupload = move_uploaded_file($namaSementara, $dirUpload . $namaFile);
+    } else {
+        echo 'file harus Gambar';
+    }
 
     if ($terupload) {
         $avatar = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/dcc/" . $dirUpload . $namaFile;
     } else {
         $avatar = $_POST['fileLama'];
     }
-
 
     // update user data
     $result = mysqli_query($mysqli, "UPDATE mahasiswa SET nama='$nama',kelas='$kelas',alamat='$alamat', avatar='$avatar' WHERE id=$id");

@@ -48,8 +48,16 @@
         // tentukan lokasi file akan dipindahkan
         $dirUpload = "Upload/";
 
+        $file_type = $_FILES['avatar']['type']; //returns the mimetype
+
+        $allowed = array("image/jpeg", "image/gif", "image/png", "image/jpg");
+        if (!in_array($file_type, $allowed)) {
+            # code...
+            $terupload = move_uploaded_file($namaSementara, $dirUpload . $namaFile);
+        } else {
+            echo 'file harus Gambar';
+        }
         // pindahkan file
-        $terupload = move_uploaded_file($namaSementara, $dirUpload . $namaFile);
 
         $avatar = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/dcc/" . $dirUpload . $namaFile;
 
