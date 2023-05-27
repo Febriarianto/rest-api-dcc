@@ -53,7 +53,7 @@
         $allowed = array("image/jpeg", "image/gif", "image/png", "image/jpg");
         if (!in_array($file_type, $allowed)) {
             # code...
-            echo 'file harus Gambar';
+            return 'file harus Gambar';
         } else {
             $terupload = move_uploaded_file($namaSementara, $dirUpload . $namaFile);
         }
