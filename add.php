@@ -51,6 +51,7 @@
         // pindahkan file
         $terupload = move_uploaded_file($namaSementara, $dirUpload . $namaFile);
 
+        $avatar = (empty($_SERVER['HTTPS']) ? 'http' : 'https') . "://$_SERVER[HTTP_HOST]/dcc/" . $dirUpload . $namaFile;
 
         // include database connection file
         include_once("config.php");
